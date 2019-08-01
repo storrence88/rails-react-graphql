@@ -68,6 +68,7 @@ const createHttpLink = () => new HttpLink({
   credentials: 'include',
 })
 
+// Create Apollo client instance
 export const createClient = (cache, requestLink) => {
   return new ApolloClient({
     link: ApolloLink.from([
