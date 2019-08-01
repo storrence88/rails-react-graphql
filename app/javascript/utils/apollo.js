@@ -61,3 +61,20 @@ const createErrorLink = () => onError(({ graphQLErrors, networkError, operation 
     logError('GraphQL - NetworkError', networkError);
   }
 })
+
+// http link
+const createHttpLink = () => new HttpLink({
+  uri: '/graphql',
+  credentials: 'include',
+})
+
+export const createClient = (cache, requestLink) => {
+  return new ApolloClient({
+    link: ApolloLink.from([
+      createErrorLink(),
+      createLinkWithToken(),
+      createHttpLink(),
+    ]),
+    cache,
+  });
+};
